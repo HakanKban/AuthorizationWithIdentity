@@ -19,18 +19,18 @@ builder.Services.AddDbContext<AppIdentityDbContext>(x =>
 });
 
 //password validation,validatorler
-builder.Services.AddIdentity<AppUser,AppRole>(opt=>
+builder.Services.AddIdentity<AppUser, AppRole>(opt =>
 {
     opt.User.RequireUniqueEmail = true;
     opt.User.AllowedUserNameCharacters = "qwertyuýopðüasdfghjklþizxcvbnmöç_-+$ASDFGHJKLÞÝQWERTYUIOPÐÜZXCVBNMÖÇ";
     opt.Password.RequiredLength = 4;
     opt.Password.RequireNonAlphanumeric = false;
     opt.Password.RequireUppercase = false;
-    opt.Password.RequireLowercase= false;
+    opt.Password.RequireLowercase = false;
     opt.Password.RequireDigit = false;
-   
+
 }).AddPasswordValidator<CustomPasswordValidator>().AddErrorDescriber<CustomIdentityErrorDescriber>().
-AddUserValidator<CustomUserValidator>().AddEntityFrameworkStores<AppIdentityDbContext>();
+AddUserValidator<CustomUserValidator>().AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultTokenProviders();
 
 
 CookieBuilder cookieBuilder = new CookieBuilder();
